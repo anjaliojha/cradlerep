@@ -4,8 +4,10 @@ const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
 const Constraint = Matter.Constraint;
+const Render = Matter.Render;
 
 var ball1,rope1;
+var world,engine;
 
 function preload()
 {
@@ -35,15 +37,24 @@ function setup() {
 	bobObject4 = new Bob(440,475,bobDiameter);
 	bobObject5 = new Bob(480,475,bobDiameter);
 
-
+	var render = Render.create({
+		element: document.body,
+		engine: engine,
+		options: {
+		  width: 1200,
+		  height: 700,
+		  wireframes: false
+		}
+	  });
+  
 
 
 	//create the rope objects
-	rope1=new Rope(bobObject1.body,roofObject.body,-bobDiameter*2, 10)
-	rope2=new Rope(bobObject2.body,roofObject.body,-bobDiameter*1, 10)
-	rope3=new Rope(bobObject3.body,roofObject.body,-bobDiameter*0, 10)
-	rope4=new Rope(bobObject4.body,roofObject.body,40, 10)
-	rope5=new Rope(bobObject5.body,roofObject.body,80, 10)
+	rope1=new Rope(bobObject1.body,roofObject.body,-bobDiameter*2, 0)
+	rope2=new Rope(bobObject2.body,roofObject.body,-bobDiameter*1, 0)
+	rope3=new Rope(bobObject3.body,roofObject.body,-bobDiameter*0, 0)
+	rope4=new Rope(bobObject4.body,roofObject.body,40, 0)
+	rope5=new Rope(bobObject5.body,roofObject.body,80, 0)
 
 
 
@@ -58,10 +69,10 @@ function draw() {
   rectMode(CENTER);
   background("white");
 
-  keyPressed();
+  //keyPressed();
   text(mouseX+","+mouseY,mouseX,mouseY);
 
-  Engine.update(engine);
+  //Engine.update(engine);
   
 	  roofObject.display();
 	  	
@@ -81,9 +92,9 @@ function draw() {
 }
 
 function keyPressed(){
-	if(keyDown(UP_ARROW)){
-		Matter.Body.isStatic = false;
-		Matter.Body.applyForce(bobObject1.body,bobObject1.body.position,{x:-100,y:-100});
+	if(keyCode===38){
+		//Matter.Body.isStatic = false;
+		Matter.Body.applyForce(bobObject1.body, bobObject1.body.position,{x:-50,y:-50});
 	}
 }
 
